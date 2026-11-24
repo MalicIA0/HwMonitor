@@ -1,0 +1,54 @@
+HW MONITOR — mini-moniteur materiel
+====================================
+
+Ce que ca affiche (fenetre ~10 x 7 cm, toujours au premier plan) :
+  - CPU : temperature + % d'utilisation
+  - GPU : temperature + % d'utilisation (carte NVIDIA prioritaire)
+  - RAM : Go utilises + % d'utilisation
+  - RES : resolution de rendu de l'appli au premier plan (repli : celle de l'ecran)
+          les definitions standard sont nommees : HD, Full HD, QHD, 4K, 8K
+          (taille non standard = pixels exacts ; infobulle = toujours les pixels)
+          couleur par palier : 4K = or, 1440p = violet, 1080p = vert, en dessous = orange
+  - FPS : images/seconde de l'application au premier plan (jeu, etc.)
+
+LANCEMENT
+---------
+Double-clic sur le raccourci "HW Monitor" (Bureau).
+Windows demandera une elevation (UAC) : c'est NORMAL et OBLIGATOIRE — la lecture
+des capteurs materiels passe par un pilote systeme qui exige les droits admin.
+Sans admin : le CPU et les FPS resteront a "--" / "—".
+
+TEMPERATURE CPU : PAWNIO OBLIGATOIRE
+------------------------------------
+LibreHardwareMonitor n'embarque plus de pilote : pour lire la temperature du
+CPU (Ryzen), il faut installer PawnIO (pilote signe Microsoft, compatible avec
+l'Integrite memoire et la liste de blocage des pilotes — rien a desactiver).
+  -> Installeur : PawnIO_setup.exe (ou https://pawnio.eu)
+Sans PawnIO : temp CPU = "--" (le reste fonctionne).
+
+UTILISATION
+-----------
+  - Deplacer  : cliquer-glisser n'importe ou sur la fenetre.
+  - Fermer    : la croix en haut a droite.
+  - Reglages  : l'engrenage en haut a droite (visible au survol) : disposition
+                (En ligne / En colonne / Mixte).
+
+FPS
+---
+Les FPS s'affichent uniquement quand l'appli au premier plan "presente" des
+images via DirectX/Vulkan/OpenGL (jeux, apps 3D). Sur le bureau ou une appli
+classique, c'est normal de voir "—".
+La mesure utilise PresentMon (Intel) — le fichier PresentMon.exe doit rester
+a cote de HwMonitor.exe.
+
+RECOMPILER
+----------
+Lancer deploy.ps1 (clic droit -> "Executer avec PowerShell").
+Il compile ET pousse le nouvel exe aux TROIS endroits ou il vit : l'overlay
+installe, le projet All Access et All Access installe. Ne pas mettre a jour
+seulement l'overlay : All Access croirait avoir une mise a jour a proposer et
+remettrait l'ancienne version au clic sur "Mettre a jour".
+
+build.ps1 ne fait qu'une compilation de test (pas de deploiement).
+
+Emplacement du projet : %USERPROFILE%\HardwareMonitor

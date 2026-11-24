@@ -1,0 +1,8 @@
+bin/
+obj/
+.vs/
+*.user
+# Certificat de signature : ne JAMAIS publier
+signing/
+*.pfx
+/16
